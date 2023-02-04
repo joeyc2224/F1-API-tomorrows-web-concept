@@ -1,0 +1,35 @@
+body {
+  text-align: center;
+}
+
+.btn-group button {
+  background-color: #04aa6d;
+  border: 1px solid green;
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none;
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+.btn-group .active {
+  background-color: #025f3d;
+}
+
+.standings-row{
+  color: #025f3d;
+}
+

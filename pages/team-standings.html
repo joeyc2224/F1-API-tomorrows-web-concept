@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/standings.css">
+
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a class="active" href="./driver-standings.html">Standings</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+    <label for="quantity">Select Season: </label>
+    <input id="year-select" oninput="yearChange()" type="number" min="1958" max="2022" step="1" value="2022" />
+
+    <div class="btn-group" style="width:100%">
+        <a href="./driver-standings.html"><button style="width:50%">Drivers</button></a>
+        <a href="./team-standings.html"><button class="active" style="width:50%">Teams</button></a>
+    </div>
+
+    <script src="../scripts/standings-scripts/constructors.js"></script>
+
+    <table id="standings-table">
+    </table>
+
+</body>
+
+</html>
