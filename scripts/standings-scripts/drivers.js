@@ -21,10 +21,10 @@ function loadStandings() {
       return esc(params[k]);
     })
     .join("/");
-
+  //fetch standings data from API
   fetch("http://ergast.com/api/f1/" + query + ".json", requestOptions)
     .then(function (response) {
-      console.log(response);
+      //console.log(response);
       return response.json();
     })
     .then(function (standings) {
@@ -43,7 +43,7 @@ function loadStandings() {
     headings.innerHTML =
       "<th>Position</th><th>Driver</th><th>Nationality</th><th>Team</th><th>Points</th>";
     mainContainer.appendChild(headings);
-    
+
     for (const rank of standings.MRData.StandingsTable.StandingsLists[0]
       .DriverStandings) {
       var row = document.createElement("tr");

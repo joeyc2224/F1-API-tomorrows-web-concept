@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: fixed;
+  top: 45px;
+  bottom: 0px;
+  width: 100%;
+}
+
+input {
+  position: absolute;
+}
+
+#output{
+  position: absolute;
+}
+
+.marker {
+  background-image: url(../images/formula-1-logo-0.png);
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(238, 0, 0);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: f1FontReg;
+  src: url(../fonts/Formula1-Regular-1.ttf);
+}
+
+.mapboxgl-popup {
+  font-family: f1FontReg;
+  font-size: 11px;
+  color: #303030;
+  text-transform: uppercase;
+}
+
+.rounded-rect {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 50px -25px black;
+}
+
+.flex-center {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  font-family: "Titillium Web", sans-serif;
+  color: #303030;
+}
+
+.sidebar {
+  transition: transform 1s;
+  z-index: 1;
+  width: 350px;
+  height: 100%;
+}
+
+.collapsed {
+  transform: translateX(-345px);
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 15px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.race-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 0px;
+}
+
+.table-wrapper {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 200px;
+}

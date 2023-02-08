@@ -1,14 +1,22 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Titillium Web", sans-serif;
+  color: #303030;
+}
+
+@font-face {
+  font-family: f1Font;
+  src: url(../fonts/Formula1-Bold_web.ttf);
 }
 
 ul {
+  font-family: f1Font;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #303030;
 }
 
 li {
@@ -28,5 +36,5 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: #04aa6d;
+  background-color: #ee0000;
 }

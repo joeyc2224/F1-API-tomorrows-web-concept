@@ -1,14 +1,38 @@
-body {
+#year-select{
+  margin: 15px;
+  width: 20%;
+  height: 22px;
+  border: 0.5px solid #8f8f8f;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 9px;
+
+}
+
+.year-select-label{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.input-container{
   text-align: center;
 }
 
+@font-face {
+  font-family: f1FontReg;
+  src: url(../fonts/Formula1-Regular-1.ttf);
+}
+
 .btn-group button {
-  background-color: #04aa6d;
-  border: 1px solid green;
+  font-family: f1FontReg;
+  font-size: 18px;
+  background-color: #303030;
+  border: 0.5px solid white;
   color: white;
   padding: 10px 24px;
   cursor: pointer;
   float: left;
+
 }
 
 .btn-group button:not(:last-child) {
@@ -22,14 +46,44 @@ body {
 }
 
 .btn-group button:hover {
-  background-color: #3e8e41;
+  background-color: #7a0000;
 }
 
 .btn-group .active {
-  background-color: #025f3d;
+  background-color: #ee0000;
 }
 
-.standings-row{
-  color: #025f3d;
+#standings-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 0.5px solid white;
 }
 
+#standings-table th {
+  padding: 8px;
+}
+
+#standings-table td {
+  border-top: 1px solid #ddd;
+  padding: 13px;
+}
+
+#standings-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#standings-table tr:nth-child(1) {
+  background-color: #ac1e1e;
+}
+
+#standings-table tr:hover {
+  background-color: #ddd;
+}
+
+#standings-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ee0000;
+  color: white;
+}
