@@ -4,14 +4,31 @@ const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/satellite-streets-v9",
   projection: "globe",
-  center: [-74.5, 40],
+  center: [-0.086, 51.42],
   zoom: 2,
 });
 
+//add stars and fog to mapbox globe
 map.on("style.load", () => {
-  map.setFog({}); // Set the default atmosphere style, since satellite-v9 doesn't include atmosphere by default.
+  map.setFog({});
 });
 
+//add mapbox navigation controls overlay
+map.addControl(
+  new mapboxgl.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+  })
+);
+
+map.addControl(
+  new mapboxgl.NavigationControl({
+    showCompass: false,
+  })
+);
+
+//year var determined by slider value
 var year = document.getElementById("slider").value;
 
 var slider = document.getElementById("slider");
@@ -27,28 +44,31 @@ slider.onchange = function () {
   location.reload();
 };
 
+//fetch f1 api data using year value to display correct season tracks
 fetch("http://ergast.com/api/f1/" + year + ".json")
   .then((data) => data.json())
   .then((trackData) => loadMarkers(trackData));
+
 function loadMarkers(trackData) {
+  //Json data starting at list of races in season
   for (const race of trackData.MRData.RaceTable.Races) {
-    //convert to valid coords object
+    //convert track position to valid coords object
     const trackCoords = {
       lat: race.Circuit.Location.lat,
       lng: race.Circuit.Location.long,
     };
-    const round = race.round;
+    const round = race.round; //store round for use in sidebar
 
     const trackProps = document.createElement("div");
-    trackProps.className = "marker";
+    trackProps.className = "marker"; //create marker to push to map at end of function
 
-    //when track marker is pressed
+    //when a track marker is pressed
     trackProps.addEventListener("click", () => {
-      fetch("http://ergast.com/api/f1/" + year + "/" + round + "/results.json")
+      fetch("http://ergast.com/api/f1/" + year + "/" + round + "/results.json") //fetch specific race data using year and round no. clicked on
         .then((data) => data.json())
         .then((roundData) => showRound(roundData));
       var raceContainer = document.getElementById("race-container");
-      raceContainer.innerHTML = "";
+      raceContainer.innerHTML = ""; //clear any previous results from container
 
       function showRound(roundData) {
         //push info to sidebar
@@ -60,9 +80,9 @@ function loadMarkers(trackData) {
 
         var raceLink = document.createElement("p");
         raceLink.innerHTML =
-          "<a href='" +
+          "<a target='_blank' href='" +
           race.url +
-          "'>Event Wiki&nbsp;&nbsp<span class='fa fa-arrow-right'></span></a>";
+          "'>Event Wiki&nbsp;&nbsp<span class='fa fa-arrow-right'></span></a>"; //link to race wiki
         raceContainer.appendChild(raceLink);
 
         var raceVenue = document.createElement("h2");
@@ -80,7 +100,7 @@ function loadMarkers(trackData) {
         raceContainer.appendChild(raceDate);
 
         //event results table element
-        var tableTitle = document.createElement("h3");
+        var tableTitle = document.createElement("h4");
         tableTitle.className = "table-title";
         tableTitle.innerHTML = "Results";
         raceContainer.appendChild(tableTitle);
@@ -96,10 +116,11 @@ function loadMarkers(trackData) {
         var headings = document.createElement("thead");
         headings.className = "results-headings";
         headings.innerHTML =
-          "<th>Position</th><th>Driver</th><th>Team</th><th>Laps</th><th>Time</th>";
+          "<th>Pos</th><th>Driver</th><th>Team</th><th>Laps</th><th>Time</th>"; //result table headings
         resultsTable.appendChild(headings);
 
         for (const driver of roundInfo.Results) {
+          //for each driver in race - add a row with data
           //creates new row in results table
           var row = document.createElement("tr");
           row.className = "results-row";
@@ -125,7 +146,7 @@ function loadMarkers(trackData) {
           if (driver.status == "Finished") {
             time.innerHTML = driver.Time.time;
           } else {
-            time.innerHTML = "DNF";
+            time.innerHTML = driver.status;
           }
           row.appendChild(time);
 
@@ -133,12 +154,13 @@ function loadMarkers(trackData) {
         }
 
         //fastest lap
-        var fastestLapTitle = document.createElement("h3");
+        var fastestLapTitle = document.createElement("h4");
         fastestLapTitle.className = "fastest-lap-title";
         fastestLapTitle.innerHTML = "Fastest Lap";
         raceContainer.appendChild(fastestLapTitle);
 
         fetch(
+          //get fastest lap data
           "http://ergast.com/api/f1/" +
             year +
             "/" +
@@ -151,23 +173,28 @@ function loadMarkers(trackData) {
         function showFL(fastestLapData) {
           var fastestLap = fastestLapData.MRData.RaceTable.Races[0].Results[0];
 
+          var lapContainer = document.createElement("div");
+          lapContainer.className = "lap-container";
+
           var name = document.createElement("h4");
           name.innerHTML =
             fastestLap.Driver.givenName + " " + fastestLap.Driver.familyName;
-          raceContainer.appendChild(name);
+          lapContainer.appendChild(name);
 
           var lap = document.createElement("h4");
           lap.innerHTML = "Lap: " + fastestLap.FastestLap.lap;
-          raceContainer.appendChild(lap);
+          lapContainer.appendChild(lap);
 
           var time = document.createElement("h4");
           time.innerHTML = "Time: " + fastestLap.FastestLap.Time.time;
-          raceContainer.appendChild(time);
+          lapContainer.appendChild(time);
 
           var avSpeed = document.createElement("h4");
           avSpeed.innerHTML =
             "Avg Speed: " + fastestLap.FastestLap.AverageSpeed.speed + " kph";
-          raceContainer.appendChild(avSpeed);
+          lapContainer.appendChild(avSpeed);
+
+          raceContainer.appendChild(lapContainer);
         }
       }
 
@@ -188,7 +215,7 @@ function loadMarkers(trackData) {
       });
     });
 
-    new mapboxgl.Marker(trackProps).setLngLat(trackCoords).addTo(map);
+    new mapboxgl.Marker(trackProps).setLngLat(trackCoords).addTo(map); //add clickable points to map
 
     const popup = new mapboxgl.Popup({
       offset: 15,
@@ -197,6 +224,7 @@ function loadMarkers(trackData) {
     });
 
     trackProps.addEventListener("mouseover", () => {
+      //show race name when hovering on mabox marker
       popup.setLngLat(trackCoords).setHTML(race.raceName).addTo(map);
     });
 

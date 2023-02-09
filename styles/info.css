@@ -1,0 +1,19 @@
+.page-content {
+  height: auto;
+  max-width: 900px;
+  margin: auto;
+  width: 50%;
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.quote {
+  color: #161d27;
+  font-size: 20px;
+  font-weight: 400;
+  max-width: 500px;
+  margin-top: -10px;
+}

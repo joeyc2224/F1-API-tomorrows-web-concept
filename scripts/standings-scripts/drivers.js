@@ -36,7 +36,7 @@ function loadStandings() {
 
   function appendData(standings) {
     var mainContainer = document.getElementById("standings-table");
-    mainContainer.innerHTML = "";
+    mainContainer.innerHTML = "";//clear table from any previous year search before appending data
 
     var headings = document.createElement("thead");
     headings.className = "standings-heads";
@@ -44,14 +44,14 @@ function loadStandings() {
       "<th>Position</th><th>Driver</th><th>Nationality</th><th>Team</th><th>Points</th>";
     mainContainer.appendChild(headings);
 
-    for (const rank of standings.MRData.StandingsTable.StandingsLists[0]
+    for (const rank of standings.MRData.StandingsTable.StandingsLists[0]//for driver in JSON standings table
       .DriverStandings) {
-      var row = document.createElement("tr");
+      var row = document.createElement("tr");//create new row
       row.className = "standings-row";
 
       var pos = document.createElement("td");
       pos.innerHTML = rank.positionText;
-      row.appendChild(pos);
+      row.appendChild(pos);//add data to row
 
       var name = document.createElement("td");
       name.innerHTML = rank.Driver.givenName + " " + rank.Driver.familyName;
@@ -69,7 +69,7 @@ function loadStandings() {
       points.innerHTML = rank.points;
       row.appendChild(points);
 
-      mainContainer.appendChild(row);
+      mainContainer.appendChild(row);//add to main container
     }
   }
 }

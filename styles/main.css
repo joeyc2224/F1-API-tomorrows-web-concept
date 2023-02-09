@@ -17,6 +17,8 @@ ul {
   padding: 0;
   overflow: hidden;
   background-color: #303030;
+  position: fixed;
+  width: 100%;
 }
 
 li {

@@ -1,0 +1,77 @@
+@font-face {
+  font-family: f1FontReg;
+  src: url(../fonts/Formula1-Regular-1.ttf);
+}
+
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+ul {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  color: white;
+  margin: -6px;
+  background-color: black;
+}
+
+.header img {
+  opacity: 0.3;
+}
+
+.next-race-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.next-race-text h1 {
+  font-family: f1FontReg;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.next-race-text h3 {
+  margin: 0;
+}
+
+#news-container {
+  margin: 15px;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 15px;
+  row-gap: 15px;
+}
+
+@media screen and (min-width: 1070px) {
+  #news-container {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+.news-box {
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: #fefefe;
+  cursor: pointer;
+}
+
+.news-box h1 {
+  font-size: 20px;
+  margin: 20px;
+}
+
+.news-box img {
+  max-width: 100%;
+
+  overflow: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

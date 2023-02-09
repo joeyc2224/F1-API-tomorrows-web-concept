@@ -3,6 +3,16 @@ body {
   padding: 0;
 }
 
+@font-face {
+  font-family: f1FontReg;
+  src: url(../fonts/Formula1-Regular-1.ttf);
+}
+
+@font-face {
+  font-family: f1FontIta;
+  src: url(../fonts/Formula1-Italic.ttf);
+}
+
 #map {
   position: fixed;
   top: 45px;
@@ -10,12 +20,73 @@ body {
   width: 100%;
 }
 
-input {
+/* year slider */
+.slider-box {
   position: absolute;
+  right: 0px;
+  top: 250px;
+  text-align: center;
+  background-color: #00000056;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 10px;
+  border-radius: 10px 0px 0px 10px;
 }
 
-#output{
-  position: absolute;
+.slider {
+  height: calc(40vh);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #ffffffe3;
+  outline: none;
+  opacity: 0.75;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 8px;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 0px;
+  background: #ee0000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #ee0000;
+  cursor: pointer;
+  border: 0px;
+}
+
+#output {
+  color: #ffffff;
+  font-family: f1FontReg;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.mapboxgl-ctrl-logo {
+  opacity: 0;
+}
+
+.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon,
+.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon {
+  filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(6737%)
+    hue-rotate(11deg) brightness(90%) contrast(127%);
+}
+
+.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+  filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(6737%)
+    hue-rotate(11deg) brightness(90%) contrast(127%);
 }
 
 .marker {
@@ -31,11 +102,6 @@ input {
   cursor: pointer;
 }
 
-@font-face {
-  font-family: f1FontReg;
-  src: url(../fonts/Formula1-Regular-1.ttf);
-}
-
 .mapboxgl-popup {
   font-family: f1FontReg;
   font-size: 11px;
@@ -43,8 +109,12 @@ input {
   text-transform: uppercase;
 }
 
+/*side bar race content*/
 .rounded-rect {
   background: white;
+  overflow: hidden;
+  overflow-y: scroll;
+  opacity: 0.95;
   border-radius: 10px;
   box-shadow: 0 0 50px -25px black;
 }
@@ -77,29 +147,101 @@ input {
 
 .close {
   position: absolute;
-  top: 0;
+  top: -5px;
   right: 0;
-  color: #aaaaaa;
-  font-size: 28px;
+  color: rgba(168, 0, 0, 0.678);
+  font-size: 30px;
   font-weight: bold;
   margin: 15px;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: #ee0000;
   text-decoration: none;
   cursor: pointer;
 }
 
 .race-container {
-  overflow-x: hidden;
-  overflow-y: auto;
   margin-top: 0px;
+  margin: 6px;
+}
+
+.race-container h1 {
+  font-family: f1FontReg;
+  margin-bottom: -6px;
+  margin-right: 35px;
+  line-height: 27px;
+}
+
+.race-container a {
+  font-family: f1FontIta;
+  color: #ee0000;
+  text-decoration: none;
+}
+
+.race-container a:hover {
+  text-decoration: underline;
+}
+
+.race-container h3 {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.table-title {
+  margin-top: 13px;
+  margin-bottom: 8px;
+  margin-left: 0px;
+  font-size: 20px;
+  font-family: f1FontReg;
+}
+
+.fastest-lap-title {
+  margin-top: 5px;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  font-size: 20px;
+  font-family: f1FontReg;
 }
 
 .table-wrapper {
   overflow: hidden;
   overflow-y: scroll;
-  height: 200px;
+  height: 300px;
+  margin: 0px;
+}
+
+.results-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 0.5px solid white;
+}
+
+.results-table th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  background-color: #ee0000e4;
+  color: white;
+}
+
+.results-table td {
+  border-top: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.results-table tr:hover {
+  background-color: #ddd;
+}
+
+.lap-container h4 {
+  margin: 2px;
+  font-size: 13px;
+  font-weight: 600;
 }
