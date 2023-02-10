@@ -45,7 +45,7 @@ slider.onchange = function () {
 };
 
 //fetch f1 api data using year value to display correct season tracks
-fetch("http://ergast.com/api/f1/" + year + ".json")
+fetch("https://ergast.com/api/f1/" + year + ".json")
   .then((data) => data.json())
   .then((trackData) => loadMarkers(trackData));
 
@@ -64,7 +64,7 @@ function loadMarkers(trackData) {
 
     //when a track marker is pressed
     trackProps.addEventListener("click", () => {
-      fetch("http://ergast.com/api/f1/" + year + "/" + round + "/results.json") //fetch specific race data using year and round no. clicked on
+      fetch("https://ergast.com/api/f1/" + year + "/" + round + "/results.json") //fetch specific race data using year and round no. clicked on
         .then((data) => data.json())
         .then((roundData) => showRound(roundData));
       var raceContainer = document.getElementById("race-container");
@@ -161,7 +161,7 @@ function loadMarkers(trackData) {
 
         fetch(
           //get fastest lap data
-          "http://ergast.com/api/f1/" +
+          "https://ergast.com/api/f1/" +
             year +
             "/" +
             round +

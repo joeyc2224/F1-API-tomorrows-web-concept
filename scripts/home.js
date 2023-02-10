@@ -1,4 +1,4 @@
-fetch("http://ergast.com/api/f1/current/next.json")
+fetch("https://ergast.com/api/f1/current/next.json")
   .then((data) => data.json())
   .then((Data) => loadNextRace(Data));
 

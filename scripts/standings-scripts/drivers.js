@@ -22,7 +22,7 @@ function loadStandings() {
     })
     .join("/");
   //fetch standings data from API
-  fetch("http://ergast.com/api/f1/" + query + ".json", requestOptions)
+  fetch("https://ergast.com/api/f1/" + query + ".json", requestOptions)
     .then(function (response) {
       //console.log(response);
       return response.json();
